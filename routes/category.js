@@ -28,7 +28,7 @@ router.put("/:id", async (req, res) => {
     res.send({ message: "ok" });
 });
 //uwu
-
+// Super uwu
 router.delete("/:id", async (req, res) => {
     let id = req.params.id;
     await deleteCategory(id);
