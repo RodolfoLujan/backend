@@ -8,7 +8,8 @@ const productSchema = new mongoose.Schema({
     price: Number,
     discount:Number,
     images: Array(String),
-    categoryId: {type: Schema.Types.ObjectId, ref: 'categorias'}
+    categoryId: {type: Schema.Types.ObjectId, ref: 'categorias'},
+    brandId: {type: Schema.Types.ObjectId, ref: 'marcas'}
 });
 const Product = mongoose.model("productos", productSchema);
 module.exports = Product;
