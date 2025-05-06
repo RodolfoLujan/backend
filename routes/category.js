@@ -28,6 +28,9 @@ router.put("/:id", async (req, res) => {
     res.send({ message: "ok" });
 });
 //uwu
+
+
+// Vamos a beber
 // Super uwu
 router.delete("/:id", async (req, res) => {
     let id = req.params.id;
