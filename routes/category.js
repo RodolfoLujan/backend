@@ -29,6 +29,8 @@ router.put("/:id", async (req, res) => {
 });
 //uwu
 
+
+// Vamos a beber
 router.delete("/:id", async (req, res) => {
     let id = req.params.id;
     await deleteCategory(id);
