@@ -9,7 +9,9 @@ const productSchema = new mongoose.Schema({
     discount:Number,
     images: Array(String),
     categoryId: {type: Schema.Types.ObjectId, ref: 'categorias'},
-    brandId: {type: Schema.Types.ObjectId, ref: 'marcas'}
+    brandId: {type: Schema.Types.ObjectId, ref: 'marcas'},
+    isFeatured: Boolean,
+    isNewProduct: Boolean
 });
 const Product = mongoose.model("productos", productSchema);
 module.exports = Product;
