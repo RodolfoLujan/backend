@@ -8,6 +8,7 @@ const brandRoutes = require("./routes/brand");
 const productRoutes = require("./routes/product");
 const customerRoutes = require("./routes/customer"); 
 const authRoutes = require("./routes/auth"); 
+const commentRoutes = require("./routes/comment");
 const { verifyToken, isAdmin } = require("./middleware/auth-middleware");
 
 app.use(cors());
@@ -20,6 +21,8 @@ app.use("/brand", verifyToken, isAdmin, brandRoutes);
 app.use("/product", productRoutes);
 app.use("/customer", verifyToken, customerRoutes);
 app.use("/auth", authRoutes);
+app.use("/comment", commentRoutes);
+
 
 async function connectDb() {
     await mongoose.connect("mongodb://localhost:27017", {
