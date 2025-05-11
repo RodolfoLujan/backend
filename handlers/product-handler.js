@@ -23,6 +23,7 @@ async function getAllProducts() {
 
 async function getProduct(id) {
     let product = await Product.findById(id);
+    if (!product) return null;
     return product.toObject();
 }
 
