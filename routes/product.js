@@ -13,13 +13,25 @@ const { verifyToken, isAdmin } = require("../middleware/auth-middleware");
 // 🟢 Rutas públicas (no requieren token)
 router.get("/", async (req, res) => {
   try {
-    const products = await getAllProducts();
+    const { search, categoryId } = req.query;
+    const filter = {};
+
+    if (search) {
+      filter.name = { $regex: search, $options: 'i' }; // Búsqueda insensible a mayúsculas
+    }
+
+    if (categoryId) {
+      filter.categoryId = categoryId;
+    }
+
+    const products = await Product.find(filter);
     res.send(products);
   } catch (err) {
     console.error("Error al obtener productos:", err.message);
     res.status(500).send({ error: "Error del servidor" });
   }
 });
+
 
 router.get("/:id", async (req, res) => {
   try {
