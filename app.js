@@ -10,6 +10,7 @@ const customerRoutes = require("./routes/customer");
 const authRoutes = require("./routes/auth"); 
 const commentRoutes = require("./routes/comment");
 const cartRoutes = require("./routes/cart");
+const orderRoutes = require("./routes/order");
 const { verifyToken, isAdmin } = require("./middleware/auth-middleware");
 
 app.use(cors());
@@ -24,7 +25,7 @@ app.use("/customer", verifyToken, customerRoutes);
 app.use("/auth", authRoutes);
 app.use("/comment", commentRoutes);
 app.use("/cart", cartRoutes);
-
+app.use("/order", orderRoutes);
 
 
 async function connectDb() {

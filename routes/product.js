@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const router = express.Router();
 const {
   addProduct,
@@ -9,19 +10,20 @@ const {
 } = require("../handlers/product-handler");
 
 const { verifyToken, isAdmin } = require("../middleware/auth-middleware");
+const Product = require("../Database/product");
 
-// 🟢 Rutas públicas (no requieren token)
+//  Rutas públicas (no requieren token)
 router.get("/", async (req, res) => {
   try {
     const { search, categoryId } = req.query;
     const filter = {};
 
     if (search) {
-      filter.name = { $regex: search, $options: 'i' }; // Búsqueda insensible a mayúsculas
+      filter.name = { $regex: search, $options: "i" }; // Búsqueda insensible a mayúsculas
     }
 
     if (categoryId) {
-      filter.categoryId = categoryId;
+      filter.categoryId = new mongoose.Types.ObjectId(categoryId);
     }
 
     const products = await Product.find(filter);
@@ -32,12 +34,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const product = await getProduct(id);
-    if (!product) return res.status(404).send({ message: "Producto no encontrado" });
+    if (!product)
+      return res.status(404).send({ message: "Producto no encontrado" });
     res.send(product);
   } catch (err) {
     console.error("Error al obtener producto:", err.message);

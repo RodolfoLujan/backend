@@ -12,7 +12,8 @@ const productSchema = new mongoose.Schema({
     brandId: {type: Schema.Types.ObjectId, ref: 'marcas'},
     isFeatured: Boolean,
     isNewProduct: Boolean,
-    stock: { type: Number, default: 0 }
+    stock: { type: Number, required: true, default: 0 },
+
 });
 const Product = mongoose.model("productos", productSchema);
 module.exports = Product;
